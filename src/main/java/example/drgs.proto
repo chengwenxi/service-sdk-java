@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package example.drgs;
+
+// The greeting service definition.
+service Greeter {
+    //@Attribute description: sayHello
+    //@Attribute output_privacy: NoPrivacy
+    //@Attribute output_cached: NoCached
+    rpc Drgs (DrgsRequest) returns (DrgsResponse) {}
+}
+
+// The request message containing the user's name.
+message DrgsRequest {
+    string mainDiagnosisCode = 1;
+    string mainDiagnosisName = 2;
+    string operationName = 3;
+    string sex = 4;
+    string status = 5;
+    repeated SecondDiagnosis SecondDiagnosis = 6;
+}
+
+message SecondDiagnosis {
+    string diagnosisCode = 1;
+    string diagnosisName = 2;
+}
+
+// The response message containing the greetings
+message DrgsResponse {
+    string drg = 1;
+    string mdc = 2;
+    string error = 3;
+    string mdc_name = 4;
+    string drg_name = 5;
+}

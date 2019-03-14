@@ -1,0 +1,26 @@
+group 'org.iris.service'
+version '1.0.1-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.asynchttpclient:async-http-client:2.0.35"
+    compile ("net.logstash.logback:logstash-logback-encoder:4.9") {
+        exclude(group: 'ch.qos.logback')
+    }
+    compile "com.netflix.feign:feign-httpclient:8.18.0"
+    compile "com.netflix.feign:feign-jackson:8.18.0"
+    compile "junit:junit:4.12"
+    compile group:'org.web3j',name: 'core',version:'2.3.1'
+    compile "com.google.protobuf:protobuf-java:3.6.1"
+    compile "org.eclipse.jetty.websocket:websocket-client:9.4.14.v20181114"
+}
