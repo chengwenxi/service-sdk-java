@@ -1,18 +1,25 @@
 package org.irisnet.service.entity;
 
-import org.web3j.abi.datatypes.generated.Uint64;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.irisnet.service.Config;
 
 public class BaseTx {
     String name;
     String password;
+    @JsonProperty("chain_id")
     String chainId;
-    Uint64 accountNumber;
-    Uint64 sequence;
+    @JsonProperty("account_number")
+    String accountNumber;
+    int sequence;
     String gas;
+    @JsonProperty("gas_adjustment")
     String gasAdjustment;
     String fee;
 
-    public BaseTx(String name, String password, String chainId, Uint64 accountNumber, Uint64 sequence, String gas, String gasAdjustment, String fee) {
+    public BaseTx() {
+    }
+
+    public BaseTx(String name, String password, String chainId, String accountNumber, int sequence, String gas, String gasAdjustment, String fee) {
         this.name = name;
         this.password = password;
         this.chainId = chainId;
@@ -21,6 +28,11 @@ public class BaseTx {
         this.gas = gas;
         this.gasAdjustment = gasAdjustment;
         this.fee = fee;
+    }
+
+    public BaseTx BaseTxDefault(String accountNumber, int sequence) {
+        return new BaseTx(Config.NAME, Config.PASSWORD, Config.CHAINID, accountNumber, sequence,
+                Config.GAS, Config.GASADJUSTMENT, Config.FEE);
     }
 
     public String getName() {
@@ -47,19 +59,19 @@ public class BaseTx {
         this.chainId = chainId;
     }
 
-    public Uint64 getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(Uint64 accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
-    public Uint64 getSequence() {
+    public int getSequence() {
         return sequence;
     }
 
-    public void setSequence(Uint64 sequence) {
+    public void setSequence(int sequence) {
         this.sequence = sequence;
     }
 
@@ -86,4 +98,5 @@ public class BaseTx {
     public void setFee(String fee) {
         this.fee = fee;
     }
+
 }
